@@ -9,17 +9,16 @@ public class LRU {
     public static boolean referToThePage
             (int actualReferenceID, Memory localMemory, ArrayList<Integer> references) {
 
-        if (!localMemory.contains(references.get(actualReferenceID)))
-        {
-            if (!localMemory.isFull())
+        if (!localMemory.contains(references.get(actualReferenceID))) {
+            if (!localMemory.isFull()) {
                 localMemory.addPage(references.get(actualReferenceID));
-
-            else
-            {
+            }
+            else {
                 int localMemoryLeastUsedID = getLeastRecentlyUsedPageID(actualReferenceID, localMemory, references);
 
-                if (localMemory.removePage(references.get(localMemoryLeastUsedID)))
+                if (localMemory.removePage(references.get(localMemoryLeastUsedID))) {
                     localMemory.addPage(references.get(actualReferenceID));
+                }
             }
             return true;
         }
@@ -36,11 +35,12 @@ public class LRU {
 
             int pageReferenceID = actualReferenceID-1;
 
-            while (pageReferenceID >= 0 && !references.get(pageReferenceID).equals(page))
+            while (pageReferenceID >= 0 && !references.get(pageReferenceID).equals(page)) {
                 pageReferenceID--;
-
-            if (pageReferenceID < leastRecentlyID)
+            }
+            if (pageReferenceID < leastRecentlyID) {
                 leastRecentlyID = pageReferenceID;
+            }
         }
 
         return leastRecentlyID;

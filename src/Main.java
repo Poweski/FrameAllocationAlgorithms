@@ -3,7 +3,6 @@ import Helpful.*;
 import MyObjects.Process;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Main {
 
@@ -23,8 +22,6 @@ public class Main {
 
     public static void main (String[] args) {
 
-        Random generator = new Random();
-
         double equalResult = 0;
         double proportionalResult = 0;
         double pffControlResult = 0;
@@ -35,9 +32,7 @@ public class Main {
         double[] pffControlArray = new double[NUMBER_OF_PROCESSES];
         double[] zoneModelArray = new double[NUMBER_OF_PROCESSES];
 
-        for (int i = 0; i < REPETITIONS; i++)
-        {
-//            SEED = generator.nextInt();
+        for (int i = 0; i < REPETITIONS; i++) {
 
             ArrayList<Process> processes = Generator.generateProcesses
                     (SEED, NUMBER_OF_PROCESSES, MIN_PAGE_PER_PROCESS_NUMBER, MAX_PAGE_PER_PROCESS_NUMBER,
@@ -59,43 +54,43 @@ public class Main {
             zoneModelResult += zoneModel.run();
 
             int j = 0;
-            for (Process proc : equalProcesses)
-            {
-                equalArray[j] += proc.getPageFaults();
+            for (Process process : equalProcesses) {
+                equalArray[j] += process.getPageFaults();
                 j++;
             }
             j = 0;
-            for (Process proc : proportionalProcesses)
-            {
-                proportionalArray[j] += proc.getPageFaults();
+            for (Process process : proportionalProcesses) {
+                proportionalArray[j] += process.getPageFaults();
                 j++;
             }
             j = 0;
-            for (Process proc : PFFControlProcesses)
-            {
-                pffControlArray[j] += proc.getPageFaults();
+            for (Process process : PFFControlProcesses) {
+                pffControlArray[j] += process.getPageFaults();
                 j++;
             }
             j = 0;
-            for (Process proc : zoneModelProcesses)
-            {
-                zoneModelArray[j] += proc.getPageFaults();
+            for (Process process : zoneModelProcesses) {
+                zoneModelArray[j] += process.getPageFaults();
                 j++;
             }
         }
 
         System.out.println("\nEqual: " + equalResult/REPETITIONS);
-        for (int i = 0; i < NUMBER_OF_PROCESSES; i++)
-            System.out.print((equalArray[i]/REPETITIONS) + " ");
+        for (int i = 0; i < NUMBER_OF_PROCESSES; i++) {
+            System.out.print((equalArray[i] / REPETITIONS) + " ");
+        }
         System.out.println("\n\nProportional: " + proportionalResult/REPETITIONS);
-        for (int i = 0; i < NUMBER_OF_PROCESSES; i++)
-            System.out.print((proportionalArray[i]/REPETITIONS) + " ");
+        for (int i = 0; i < NUMBER_OF_PROCESSES; i++) {
+            System.out.print((proportionalArray[i] / REPETITIONS) + " ");
+        }
         System.out.println("\n\nPFFControl: " + pffControlResult/REPETITIONS);
-        for (int i = 0; i < NUMBER_OF_PROCESSES; i++)
-            System.out.print((pffControlArray[i]/REPETITIONS) + " ");
+        for (int i = 0; i < NUMBER_OF_PROCESSES; i++) {
+            System.out.print((pffControlArray[i] / REPETITIONS) + " ");
+        }
         System.out.println("\n\nZoneModel: " + zoneModelResult/REPETITIONS);
-        for (int i = 0; i < NUMBER_OF_PROCESSES; i++)
-            System.out.print((zoneModelArray[i]/REPETITIONS) + " ");
+        for (int i = 0; i < NUMBER_OF_PROCESSES; i++) {
+            System.out.print((zoneModelArray[i] / REPETITIONS) + " ");
+        }
         System.out.println();
     }
 }

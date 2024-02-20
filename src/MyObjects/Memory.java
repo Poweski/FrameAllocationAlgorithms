@@ -30,8 +30,9 @@ public class Memory {
     }
 
     public void addPage(Integer page) {
-        if (isFull())
+        if (isFull()) {
             throw new FullMemoryException("Memory is full! Element cannot be added!");
+        }
         pages.addFirst(page);
     }
 
@@ -43,20 +44,11 @@ public class Memory {
         size++;
     }
 
-    public void decreaseSize() {
-        if (pages.size() > --size)
-            throw new FullMemoryException("Cannot decrease size of filled memory!");
-    }
-
     public void changeSize(int change) {
         int temp = size + change;
-        if (temp < pages.size())
+        if (temp < pages.size()) {
             throw new FullMemoryException("Cannot decrease size!");
+        }
         size = temp;
-    }
-
-    public void clear() {
-        size = 0;
-        pages.clear();
     }
 }

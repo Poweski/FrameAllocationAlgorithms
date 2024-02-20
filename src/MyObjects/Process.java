@@ -32,8 +32,9 @@ public class Process {
 
     public Integer getNextReference() {
         this.increaseReferencesCounter();
-        if (activeReferences.size() > 0)
-            return activeReferences.remove(0);
+        if (!activeReferences.isEmpty()) {
+            return activeReferences.removeFirst();
+        }
         return -1;
     }
 

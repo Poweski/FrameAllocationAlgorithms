@@ -1,6 +1,5 @@
 package Algorithms;
 
-import Helpful.Generator;
 import MyObjects.Memory;
 import MyObjects.Process;
 
@@ -21,27 +20,27 @@ public class Equal implements Algorithm {
 
         int memoryPerProcess = memorySize/processes.size();
 
-        for (Process proc : processes)
-            processesAndTheirMemories.put(proc, new Memory(memoryPerProcess));
+        for (Process process : processes) {
+            processesAndTheirMemories.put(process, new Memory(memoryPerProcess));
+        }
     }
 
     public int run() {
 
-        while (doneProcesses.size() < processes.size())
-        {
-            for (Process currentProcess : activeProcesses)
-            {
-                Integer page = currentProcess.getNextReference();
+        while (doneProcesses.size() < processes.size()) {
+            for (Process currentProcess : activeProcesses) {
+
+                currentProcess.getNextReference();
                 Memory currentMemory = processesAndTheirMemories.get(currentProcess);
                 int counter = currentProcess.getReferencesCounter();
 
-                if (LRU.referToThePage(counter-1, currentMemory, currentProcess.getAllReferences()))
-                {
+                if (LRU.referToThePage(counter-1, currentMemory, currentProcess.getAllReferences())) {
                     pageFaults++;
                     currentProcess.increasePageFaults();
                 }
-                if (currentProcess.getActiveReferences().size() == 0)
+                if (currentProcess.getActiveReferences().isEmpty()) {
                     doneProcesses.add(currentProcess);
+                }
             }
         }
 
